@@ -23,6 +23,7 @@ public class ChatController {
         return Map.of("generation", chatModel.call(message));
     }
 
+    // chatgpt 처럼 ux를 위해 사용, 조각조각 내보낸다
     @GetMapping("/streamTest")
     public Flux<ChatResponse> generateStream(@RequestParam(value = "message", defaultValue = "Tell me a joke") String message) {
         Prompt prompt = new Prompt(new UserMessage(message));

@@ -6,9 +6,13 @@ spring:
     username: root
     password: 1234
     url: jdbc:mysql://localhost:3306/mcp
+  jpa:
+    hibernate:
+      ddl-auto: create
   ai:
-    ollama:
-      base-url: http://localhost:11434
-      chat:
-        options:
-          model: llama3
+    mcp:
+      ollama:
+        base-url: http://localhost:11434
+        chat:
+          options:
+            model: llama3
