@@ -48,10 +48,10 @@ public class InitService {
         apiService.registerApi(title5, description5, level5, endpoint5);
 
         for (int i = 0; i < 10; i++) {
-            String title = "levelTestSearchTitle API" + i;
-            String description = "levelTestSearchDescription API" + i;
+            String title = "TestSearchTitle API" + i;
+            String description = "TestSearchDescription API" + i;
             int level6 = 4;
-            String endpoint = "/levelTest" + i;
+            String endpoint = "/test1" + i;
             apiService.registerApi(title, description, level6, endpoint);
         }
     }

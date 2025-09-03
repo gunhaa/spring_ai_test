@@ -1,9 +1,10 @@
 package com.apigate.mcp.oas;
 
+import com.apigate.mcp.loggerAdvisor.LoggerAdvisor;
 import com.apigate.mcp.oas.apiTools.ApiTools;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.ai.ollama.api.OllamaModel;
 import org.springframework.ai.ollama.api.OllamaOptions;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,9 @@ public class ApiController {
     private final ApiTools apiTools;
 
     public ApiController(ChatClient.Builder chatClientBuilder, ApiTools apiTools) {
+        Advisor loggerAdvisor = new LoggerAdvisor();
         this.chatClient = chatClientBuilder
+                .defaultAdvisors(loggerAdvisor)
                 .build();
         this.apiTools = apiTools;
     }
@@ -25,13 +28,14 @@ public class ApiController {
     @GetMapping
     public String getApi() {
         PromptTemplate pt = new PromptTemplate("""
-        I want find level4 Api
+        I want find list of apis of level 4
+        and explain reason to choose tool
         """);
 
-        return this.chatClient.prompt(pt.create(
+        return chatClient.prompt(pt.create(
                         OllamaOptions.builder()
-                                .model(OllamaModel.LLAMA3)
-                                .toolNames("getEndPointFromDescription", "getEndPointFromLevel")
+                                .model("qwen3:4b-instruct")
+//                                .toolNames("getEndPointFromDescription", "getEndPointFromLevel")
                                 .build()))
                 .tools(apiTools)
                 .call()

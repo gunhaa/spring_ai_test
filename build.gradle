@@ -35,8 +35,6 @@ dependencies {
 
     implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
     implementation 'org.springframework.ai:spring-ai-starter-mcp-client'
-
-
 	implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
